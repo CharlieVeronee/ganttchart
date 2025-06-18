@@ -42,9 +42,11 @@ today_line(ax)
 
 #Summary Stats
 summary_df = summary_stats(ship_df)
+summary_df.to_csv("gantt_stats.csv", index=True)
 print(summary_df)
 
 #Plot Figure
 ax.legend(loc="best")
 plt.tight_layout()
+fig.savefig("gantt_chart.png", dpi=300, bbox_inches="tight")
 plt.show()
