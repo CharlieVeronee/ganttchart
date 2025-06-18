@@ -1,13 +1,9 @@
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.dates as dates
-import plotly as plot
 
 from data_loader import ship_data_loader
 from transformers import date_transformation, sort_duration_start, add_duration
 from plotter import plot_ship_row
-from aesthetics import colormap
+from aesthetics import colormap, axes_format
 
 #Data Loading + Transformation
 ship_df = ship_data_loader("data/Gantt_Chart_Data_Set.xlsx")
@@ -27,22 +23,16 @@ for i,row in ship_df.iterrows(): #iterate over DataFrame rows as (index, Series)
 
 
 #Post-Plotting Aesthetics
-ax.set(title = 'Maintenance And Docking Gantt Chart', ylabel = 'Ship Name', xlabel = 'Date') #title and axis names
+axes_format(
+    ax,
+    ship_names=ship_df["Ship Name"].tolist(),
+    title="Maintenance And Docking Gantt Chart",
+    xlabel="Date",
+    ylabel="Ship Name",
+    date="%b %Y",
+)
 
-#y axis
-y_positions = list(range(len(ship_df))) #y axis datatype is number, need length of rows as y axis
-ax.set_yticks(y_positions)
-ax.set_yticklabels(ship_df['Ship Name']) #y tables
-ax.invert_yaxis() #first ship on bottom -> first ship on top
-
-#x axis
-ax.xaxis_date()
-#MAKE IT SO WORDS STAY IN GRAPH
-#mAKE IT SO DATES ARE READABLE
-ax.xaxis.set_major_locator(dates.MonthLocator())
-ax.xaxis.set_major_formatter(dates.DateFormatter('%b %Y'))
-
-ax.legend(loc = 'best') #no overlapping chart elements
+plt.tight_layout()
 plt.show()
 
 
