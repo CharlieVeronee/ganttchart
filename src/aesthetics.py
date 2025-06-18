@@ -14,6 +14,7 @@ def colormap(df, colomap_name='tab10'):
     ]
     return dict(zip(ships, samples))
 
+
 def axes_format(ax, ship_names: list[str], title: str, xlabel: str, ylabel: str, date: str = "%b %Y"):
 
     # titles + axis labels
@@ -33,6 +34,13 @@ def axes_format(ax, ship_names: list[str], title: str, xlabel: str, ylabel: str,
 
     return ax
 
+def x_axis_margins(ax, df: pd.DataFrame):
+    min_date = df[ "Maintenance Start Date" ].min()
+    max_date = df[ "Maintenance End Date"   ].max()
+    
+    pad = pd.Timedelta(days=10)
+    ax.set_xlim(min_date - pad, max_date + pad)
+
 
 def today_line(ax):
     today = pd.Timestamp.today().normalize()
@@ -41,5 +49,5 @@ def today_line(ax):
         color="red",
         linestyle="--",
         linewidth=2,
-        label="Today"
+        label="Today" #passed label to legend
     )

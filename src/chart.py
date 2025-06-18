@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from data_loader import ship_data_loader
 from transformers import date_transformation, sort_duration_start, add_duration
 from plotter import plot_ship_row
-from aesthetics import colormap, axes_format, today_line
+from aesthetics import colormap, axes_format, today_line, x_axis_margins
 from utils import summary_stats
 
 #Data Loading + Transformation
@@ -18,9 +18,12 @@ color_map = colormap(ship_df)
 #Establish Figure
 fig, ax = plt.subplots(figsize=(20, 10))
 
+#Toggles
+endpoints = True #show data endpoints
+
 #Plot Maintenance + Docking Rows
 for i,row in ship_df.iterrows(): #iterate over DataFrame rows as (index, Series) pairs
-    plot_ship_row(ax, i, row, color_map)
+    plot_ship_row(ax, i, row, color_map, endpoints)
 
 
 #Post-Plotting Aesthetics
@@ -33,6 +36,8 @@ axes_format(
     date="%b %Y",
 )
 
+x_axis_margins(ax, ship_df) #adding some margins to x axis
+
 today_line(ax)
 
 #Summary Stats
@@ -40,5 +45,6 @@ summary_df = summary_stats(ship_df)
 print(summary_df)
 
 #Plot Figure
+ax.legend(loc="best")
 plt.tight_layout()
 plt.show()

@@ -9,8 +9,8 @@ def date_transformation(df: pd.DataFrame) -> pd.DataFrame:
 
 #Sort by docking start date and reset index for iterrows()
 def sort_duration_start(df: pd.DataFrame) -> pd.DataFrame:
-    df.sort_values("Docking Start Date").reset_index(drop=True)
-    return df
+    df2 = df.sort_values("Docking Start Date").reset_index(drop=True)
+    return df2
 
 def add_duration(df: pd.DataFrame) -> pd.DataFrame:
     df["Maintenance Duration"] = (df["Maintenance End Date"] - df["Maintenance Start Date"]).dt.days
