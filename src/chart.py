@@ -5,18 +5,17 @@ import matplotlib.dates as dates
 import plotly as plot
 
 #Load Data From Excel
-ship_df = pd.read_excel('/Users/charlesveronee/Desktop/GitHub_Projects/ganttchart/Gantt_Chart_Data_Set.xlsx')
+ship_df = pd.read_excel('/Users/charlesveronee/Desktop/GitHub_Projects/ganttchart/data/Gantt_Chart_Data_Set.xlsx')
 
 
 #Data Cleaning + Formatting
 for col in ['Maintenance Start Date', 'Maintenance End Date', 'Docking Start Date', 'Docking End Date']:
     ship_df[col] = pd.to_datetime(ship_df[col], format='%m/%d/%y') #ensure proper date format
 
-# SORT BY START DATE ship_df.sort_index(1, "Docking Start Date")
+ship_df = ship_df.sort_values("Docking Start Date").reset_index(drop=True) #sort by docking start date and reset index for iterrows()
 
 
 #Establish Figure
-fig = plt.figure()
 fig, ax = plt.subplots(figsize=(20, 10))
 
 #Pre-Plotting Aesthetics
@@ -27,7 +26,7 @@ fig, ax = plt.subplots(figsize=(20, 10))
 
 for i,row in ship_df.iterrows():
     #iterate over DataFrame rows as (index, Series) pairs.
-    ax.barh(y = i+.2, width = (row['Maintenance Start Date'] - row['Maintenance End Date']).days, height = .3, left = row['Maintenance Start Date'])
+    ax.barh(y = i+.2, width = (row['Maintenance End Date'] - row['Maintenance Start Date']).days, height = .3, left = row['Maintenance Start Date'])
     #align bars to left on maintenance start
     #width is difference in start vs end
     #y value is row number ie ship, must separate docking and maintenance so they don't overlap
@@ -36,7 +35,7 @@ for i,row in ship_df.iterrows():
     duration = (row['Maintenance End Date'] - row['Maintenance Start Date']).days
     ax.text(y, i+.2, f'Maintenance: {duration} days', va='center', ha='left', fontsize=8, color='black')
 
-    ax.barh(y = i-.2, width = (row['Docking Start Date'] - row['Docking End Date']).days, height = .3, left = row['Docking Start Date'])
+    ax.barh(y = i-.2, width = (row['Docking End Date'] - row['Docking Start Date']).days, height = .3, left = row['Docking Start Date'])
 
     #bar label
     y = row['Docking Start Date']
