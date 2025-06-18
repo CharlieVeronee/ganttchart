@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.dates as dates
+import pandas as pd
 
 #Return list of colors evenly spaced for graph
 def colormap(df, colomap_name='tab10'):
@@ -26,8 +27,19 @@ def axes_format(ax, ship_names: list[str], title: str, xlabel: str, ylabel: str,
 
     # X-axis
     ax.xaxis_date() #treat values as dates
-    ax.xaxis.set_major_locator(dates.MonthLocator())
+    ax.xaxis.set_major_locator(dates.MonthLocator(interval = 3)) #too many dates
     ax.xaxis.set_major_formatter(dates.DateFormatter(date)) #format as month year
     plt.setp(ax.get_xticklabels(), rotation=30, horizontalalignment='right') #rotate so no overlap
 
     return ax
+
+
+def today_line(ax):
+    today = pd.Timestamp.today().normalize()
+    ax.axvline(
+        x=today,
+        color="red",
+        linestyle="--",
+        linewidth=2,
+        label="Today"
+    )

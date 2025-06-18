@@ -4,7 +4,6 @@
 
 ## Features
 
-#Pre-Plotting Aesthetics
-#ADD LABELS FOR \_\_DAYS IN MAINTENANCE
-#ADD PLOTLY iNTERACTION THAT SHOWS ^
+To Do
 #ADD PLOTLY INTERACTION THAT SHOWS DEPENDENCIES
+add plotly interaction that shows dates

@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 from data_loader import ship_data_loader
 from transformers import date_transformation, sort_duration_start, add_duration
 from plotter import plot_ship_row
-from aesthetics import colormap, axes_format
+from aesthetics import colormap, axes_format, today_line
+from utils import summary_stats
 
 #Data Loading + Transformation
 ship_df = ship_data_loader("data/Gantt_Chart_Data_Set.xlsx")
@@ -32,12 +33,12 @@ axes_format(
     date="%b %Y",
 )
 
+today_line(ax)
+
+#Summary Stats
+summary_df = summary_stats(ship_df)
+print(summary_df)
+
+#Plot Figure
 plt.tight_layout()
 plt.show()
-
-
-#summary statistics
-
-
-#ADD SUMMARY STATISTICS + VIEWING FOR DATA
-#average days docking or maintenance
