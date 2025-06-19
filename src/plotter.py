@@ -11,7 +11,7 @@ def plot_phase(ax, y_index: int, row: pd.Series, phase: str, start_col: str, end
         width  = duration,
         left = start,
         height = 0.3,
-        color = color,
+        color = color
     )
 
     # annotate
@@ -31,7 +31,7 @@ def plot_phase(ax, y_index: int, row: pd.Series, phase: str, start_col: str, end
         ax.text(
             x = start - pad,
             y = y_index + y_offset,
-            s = start.strftime("%d, %m, %Y"),
+            s = start.strftime("%m,%d,%y"),
             va = "center",
             ha = "right",
             fontsize = 6
@@ -40,7 +40,7 @@ def plot_phase(ax, y_index: int, row: pd.Series, phase: str, start_col: str, end
         ax.text(
             x = end + pad,
             y = y_index + y_offset,
-            s = end.strftime("%d, %m, %Y"),
+            s = end.strftime("%m,%d,%y"),
             va = "center",
             ha = "left",
             fontsize = 6
