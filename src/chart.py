@@ -20,8 +20,9 @@ color_map = colormap(ship_df)
 fig, ax = plt.subplots(figsize=(20, 10))
 
 # Toggles
-endpoints = True #show data endpoints
-docking_dependency = True #show docking overlap
+endpoints = False #show data endpoints
+docking_dependency = False #show docking overlap
+todayline = False #show today line
 
 # Plot Maintenance + Docking Rows
 for i,row in ship_df.iterrows(): #iterate over DataFrame rows as (index, Series) pairs
@@ -43,7 +44,8 @@ axes_format(
 
 x_axis_margins(ax, ship_df) #adding some margins to x axis
 
-today_line(ax)
+if todayline:
+    today_line(ax)
 
 # Summary Stats
 summary_df = summary_stats(ship_df)
