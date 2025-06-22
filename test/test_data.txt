@@ -1,0 +1,22 @@
+ship_df = pd.DataFrame({
+    "Ship Name": [
+        "USS George Washington",
+        "USS John Adams"
+    ],
+    "Maintenance Start Date": [
+        pd.Timestamp("2025-01-01"),
+        pd.Timestamp("2025-03-06")
+    ],
+    "Maintenance End Date": [
+        pd.Timestamp("2025-09-18"),
+        pd.Timestamp("2025-07-25")
+    ],
+    "Docking Start Date": [
+        pd.Timestamp("2025-01-01"),
+        pd.Timestamp("2025-03-06")
+    ],
+    "Docking End Date": [
+        pd.Timestamp("2025-06-01"),
+        pd.Timestamp("2025-04-15")
+    ]
+})
